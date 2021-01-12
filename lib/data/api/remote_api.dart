@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 class RemoteApi {
@@ -9,7 +11,7 @@ class RemoteApi {
     try {
       var result = await http.get('$currencyDetailUrl$currency');
       if (result.statusCode == 200) {
-        return result.body;
+        return json.decode(result.body);
       } else {
         return null;
       }
@@ -18,11 +20,11 @@ class RemoteApi {
     }
   }
 
-  Future<dynamic> fetchOrderBookDetail(String currency) async{
+  Future<dynamic> fetchOrderBookDetail(String currency) async {
     try {
       var result = await http.get('$orderBookUrl$currency');
       if (result.statusCode == 200) {
-        return result.body;
+        return json.decode(result.body);
       } else {
         return null;
       }
